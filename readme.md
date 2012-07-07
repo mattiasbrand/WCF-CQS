@@ -1,0 +1,1 @@
+An implementation and a usage sample for implementing a CQS service in WCF
