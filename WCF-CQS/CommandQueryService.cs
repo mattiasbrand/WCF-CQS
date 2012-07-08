@@ -1,7 +1,9 @@
-﻿using System;
+﻿using System.Linq;
 using Common;
 using Common.DataContracts.Commands;
 using Common.DataContracts.Queries;
+using Host.Handlers.CommandHandlers;
+using Host.Handlers.QueryHandlers;
 
 namespace Host
 {
@@ -9,12 +11,19 @@ namespace Host
     {
         public QueryResult SendQuery(Query query)
         {
-            throw new NotImplementedException();
+            var queryHandlerType = typeof(QueryHandlerBase<,>);
+            var queryType = query.GetType();
+            var queryResultType = queryType.BaseType.GetGenericArguments().First();
+            var handler = (IHandleQuery)IoC.Container.GetInstance(queryHandlerType.MakeGenericType(queryType, queryResultType));
+            return handler.Handle(query);
         }
 
         public void SendCommand(Command command)
         {
-            throw new NotImplementedException();
+            var commandHandlerType = typeof(CommandHandlerBase<>);
+
+            var handler = (IHandleCommand)IoC.Container.GetInstance(commandHandlerType.MakeGenericType(command.GetType()));
+            handler.Handle(command);
         }
     }
 }

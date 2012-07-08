@@ -34,17 +34,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\QueryHandlers\ListAvailablePoniesQueryHandler.cs" />
+    <Compile Include="IoC.cs" />
     <Compile Include="CommandQueryService.cs" />
+    <Compile Include="Handlers\CommandHandlers\CommandHandlerBase.cs" />
+    <Compile Include="Handlers\CommandHandlers\BarbequePonyCommandHandler.cs" />
+    <Compile Include="Handlers\CommandHandlers\IHandleCommand.cs" />
+    <Compile Include="Handlers\QueryHandlers\QueryHandlerBase.cs" />
+    <Compile Include="Handlers\QueryHandlers\IHandleQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -52,6 +63,7 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\WCF\Microsoft.VisualStudio.ServiceModel.targets" />
   <ProjectExtensions>

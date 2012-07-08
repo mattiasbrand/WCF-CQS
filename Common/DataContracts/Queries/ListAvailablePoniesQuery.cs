@@ -12,6 +12,7 @@ namespace Common.DataContracts.Queries
     [DataContract]
     public class ListAvailablePoniesQueryResult : QueryResult
     {
+        [DataMember]
         public IList<PonyDto> AvailablePonies { get; set; }
     }
 }
